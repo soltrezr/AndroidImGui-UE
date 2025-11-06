@@ -1,4 +1,4 @@
-# AndrodImGui-UE
+# AndroidImGui-UE
 
 仅支持安卓 11+
 使用 Activity 创建 Surface，实现内部ImGui绘制
