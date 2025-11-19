@@ -23,17 +23,12 @@ namespace android
     public:
         AImGui() : AImGui(Options{}) {}
         AImGui(const Options &options);
-        ~AImGui();
 
         void BeginFrame();
         void EndFrame();
+        void Destroy();
 
-        constexpr operator bool() const
-        {
-            return m_state;
-        }
-
-    private:
+    public:
         bool InitEnvironment();
         void UnInitEnvironment();
 

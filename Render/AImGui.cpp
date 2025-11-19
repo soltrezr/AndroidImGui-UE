@@ -9,7 +9,7 @@ namespace android
         InitEnvironment();
     }
 
-    AImGui::~AImGui()
+    void AImGui::Destroy()
     {
         UnInitEnvironment();
     }
@@ -135,11 +135,6 @@ namespace android
         IMGUI_CHECKVERSION();
 
         m_imguiContext = ImGui::CreateContext();
-        if (nullptr == m_imguiContext)
-        {
-            LogError("ImGui create context failed");
-            return false;
-        }
 
         auto &io = ImGui::GetIO();
         io.IniFilename = nullptr;
@@ -151,17 +146,8 @@ namespace android
         fontConfig.SizePixels = 22.0f;
         io.Fonts->AddFontDefault(&fontConfig);
 
-        if (!ImGui_ImplAndroid_Init(m_nativeWindow))
-        {
-            LogError("ImGui_ImplAndroid_Init failed");
-            return false;
-        }
-
-        if (!ImGui_ImplOpenGL3_Init("#version 300 es"))
-        {
-            LogError("ImGui_ImplOpenGL3_Init failed");
-            return false;
-        }
+        ImGui_ImplAndroid_Init(m_nativeWindow);
+        ImGui_ImplOpenGL3_Init("#version 300 es");
 
         glViewport(0, 0, m_screenWidth, m_screenHeight);
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
